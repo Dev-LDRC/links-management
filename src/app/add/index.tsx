@@ -86,7 +86,7 @@ export default function Add() {
 
          <View style={styles.form}>
 
-            <Input placeholder="name" clean_input={set_name} value={name} onChangeText={set_name} autoCorrect={false} />
+            <Input placeholder="nome" clean_input={set_name} value={name} onChangeText={set_name} autoCorrect={false} />
             <Input placeholder="url" clean_input={set_url} value={url} onChangeText={set_url} autoCorrect={false} />
             <Button title="Adicionar" onPress={handle_add} />
 
