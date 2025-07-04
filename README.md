@@ -3,7 +3,7 @@
 Um projeto simples e eficiente para gerenciar e armazenar seus links externos em um único lugar. Desenvolvido com React Native e Expo, este aplicativo permite que você adicione, salve e acesse seus links importantes de forma rápida e organizada.
 
 ## 🎓 Sobre o Projeto
-Este projeto foi desenvolvido como parte do curso introdutório **"React Native com Expo"** da [Rocketseat](https://www.rocketseat.com.br/). O objetivo foi aplicar os conceitos fundamentais de desenvolvimento mobile com React Native e Expo, criando uma aplicação funcional do zero.
+Este projeto foi desenvolvido como parte do curso introdutório **"React Native com Expo"** da [Rocketseat](https://www.rocketseat.com.br/). O objetivo foi aplicar os conceitos fundamentais de desenvolvimento mobile com React Native e Expo, criando uma aplicação funcional do zero com algumas modificações e funcionalidades extras que adicionei.
 
 Você pode encontrar o curso [aqui](https://app.rocketseat.com.br/journey/expo-com-react-native-curso-introdutorio/).
 

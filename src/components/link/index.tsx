@@ -37,7 +37,7 @@ export function Link({ name, url, onDetails }: LinkProps) {
 
          <TouchableOpacity onPress={onDetails}>
 
-            <MaterialIcons name="more-horiz" size={25} color={colors.gray[400]} />
+            <MaterialIcons name="more-horiz" size={28} color={colors.gray[400]} />
 
          </TouchableOpacity>
 

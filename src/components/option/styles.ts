@@ -15,5 +15,9 @@ export const styles = StyleSheet.create({
    secondaryTitle: {
       color: colors.gray[400],
       fontSize: 16,
+   },
+   editColor: {
+      color: "#E5E510",
    }
+
 })

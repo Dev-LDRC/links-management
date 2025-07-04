@@ -2,21 +2,45 @@ import { View, TouchableOpacity, Text, Alert } from "react-native"
 import { styles } from "./styles"
 import { MaterialIcons } from "@expo/vector-icons"
 import { colors } from "@/styles/colors"
-import { router } from "expo-router"
+import { router, useFocusEffect, useLocalSearchParams } from "expo-router"
 import { Categories } from "@/components/categories"
 import { Input } from "@/components/input"
 import { Button } from "@/components/button"
-import { useState } from "react"
+import { useCallback, useState } from "react"
 import { link_storage } from "@/storage/link_storage"
 import validator from 'validator';
 
-export default function Add() {
+export default function Edit() {
+
+   const { id_link } = useLocalSearchParams();
 
    const [category, set_category] = useState("")
    const [name, set_name] = useState("")
    const [url, set_url] = useState("")
 
-   async function handle_add() {
+   async function get_link() {
+
+      try {
+
+         const res = await link_storage.get()
+
+         const link_request = res.filter((link) => link.id === id_link)[0]
+
+         // console.log(link_request)
+         
+         set_category(link_request.category)
+         set_name(link_request.name)
+         set_url(link_request.url)
+
+      } catch (err) {
+
+         Alert.alert('Erro', 'Não foi possivel pegar as informações do link')
+         console.log(err)
+
+      }
+   }
+
+   async function handle_edit() {
 
       try {
 
@@ -36,8 +60,8 @@ export default function Add() {
             return Alert.alert('Url', "O formato da url é inválido.")
          }
 
-         await link_storage.save({
-            id: new Date().getTime().toString(),
+         await link_storage.edit({
+            id: id_link as string,
             category,
             name,
             url
@@ -46,7 +70,7 @@ export default function Add() {
 
          Alert.alert(
             "FEITO",
-            "Novo link adicionado com sucesso!",
+            "Link editado com sucesso!",
             [
                {
                   text: "Ok",
@@ -57,13 +81,21 @@ export default function Add() {
 
       } catch (err) {
 
-         Alert.alert("Erro", "Não foi possivel salvar o link")
+         Alert.alert("Erro", "Não foi possivel editar o link")
 
          console.log(err)
 
       }
 
    }
+
+   useFocusEffect(
+      useCallback(() => {
+
+         get_link();
+
+      }, [])
+   )
 
    return (
 
@@ -78,7 +110,7 @@ export default function Add() {
             </TouchableOpacity>
 
             <Text style={styles.title}>
-               Novo
+               Editando
             </Text>
 
          </View>
@@ -93,7 +125,7 @@ export default function Add() {
 
             <Input placeholder="nome" clean_input={set_name} value={name} onChangeText={set_name} autoCorrect={false} />
             <Input placeholder="url" clean_input={set_url} value={url} onChangeText={set_url} autoCorrect={false} />
-            <Button title="Adicionar" onPress={handle_add} />
+            <Button title="Editar" onPress={handle_edit} />
 
          </View>
 

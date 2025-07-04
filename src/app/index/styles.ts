@@ -1,6 +1,5 @@
 import { colors } from "@/styles/colors";
 import { StyleSheet } from "react-native";
-import { red } from "react-native-reanimated/lib/typescript/Colors";
 
 export const styles = StyleSheet.create({
    conteiner: {
@@ -67,6 +66,18 @@ export const styles = StyleSheet.create({
       fontSize: 14,
       color: colors.gray[400]
    },
+   modalConteinerInfosLink: {
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      gap: 16
+   },
+   modalScrollViewForBigTitlesOrLinks: {
+      maxHeight: 200,
+      borderWidth: 3,
+      borderRadius: 8,
+      padding: 10,
+      borderColor: colors.green[300],
+   },
    modalFooter: {
       flexDirection: 'row',
       marginTop: 32,
@@ -76,7 +87,4 @@ export const styles = StyleSheet.create({
       borderTopColor: colors.gray[600],
       paddingVertical: 14
    },
-   alertLinkYes: {
-      backgroundColor: "#FB2C36"
-   }
 })

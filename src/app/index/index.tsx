@@ -1,4 +1,4 @@
-import { View, Image, TouchableOpacity, FlatList, Modal, Text, Alert, Linking } from "react-native"
+import { View, Image, TouchableOpacity, FlatList, Modal, Text, Alert, Linking, ScrollView } from "react-native"
 
 import { categories } from "@/utils/categories"
 
@@ -10,7 +10,6 @@ import { link_storage, LinkStorage } from "@/storage/link_storage"
 import { Categories } from "@/components/categories"
 import { Link } from "@/components/link"
 import { Option } from "@/components/option"
-
 
 import { MaterialIcons } from "@expo/vector-icons"
 import { router, useFocusEffect } from "expo-router"
@@ -29,6 +28,14 @@ export default function Index() {
       set_show_modal(!show_modal)
 
       set_link(selected)
+
+   }
+
+   function handle_edit_link(id_link_selected: string) {
+
+      set_show_modal(!show_modal)
+
+      router.push(`/edit/${id_link_selected}`)
 
    }
 
@@ -163,13 +170,85 @@ export default function Index() {
 
                   </View>
 
-                  <Text style={styles.modalLinkName}>
-                     {link.name}
-                  </Text>
+                  <View style={styles.modalConteinerInfosLink}>
 
-                  <Text style={styles.modalUrl}>
-                     {link.url}
-                  </Text>
+                     {
+
+                        link.name && (
+
+                           link.name?.length > 255 ? (
+
+                              <ScrollView showsVerticalScrollIndicator={false} style={styles.modalScrollViewForBigTitlesOrLinks}>
+
+                                 <Text style={[styles.modalLinkName, { paddingBottom: 35 }]}>
+
+                                    {link.name}
+
+                                 </Text>
+
+                              </ScrollView>
+
+                           ) : (
+
+                              <Text style={styles.modalLinkName}>
+
+                                 {link.name}
+
+                              </Text>
+
+                           )
+
+                        )
+
+                     }
+
+                     {/* {
+
+                           link.name && link.url && (
+
+                              link.name.length > 255 && link.url.length > 255 ? (
+
+                                 <View style={{ height: 6, borderRadius: 5, backgroundColor: colors.green[300]}}></View>
+
+                              ) : null
+
+                           )
+
+                        } */}
+
+                     {
+
+                        link.url && (
+
+                           link.url?.length > 255 ? (
+
+                              <ScrollView showsVerticalScrollIndicator={false} style={styles.modalScrollViewForBigTitlesOrLinks}>
+
+                                 <Text style={[styles.modalUrl, { paddingBottom: 35 }]}>
+
+                                    {link.url}
+
+                                 </Text>
+
+                              </ScrollView>
+
+                           ) : (
+
+                              <Text style={styles.modalUrl}>
+
+                                 {link.url}
+
+                              </Text>
+
+                           )
+
+                        )
+
+                     }
+
+                     <Option name="Editar" onPress={() => handle_edit_link(link.id)} icon={"edit-note"} variant="secondary" edit={true} />
+
+                  </View>
 
                   <View style={styles.modalFooter}>
 

@@ -6,10 +6,11 @@ import { colors } from "@/styles/colors";
 interface OptionProps extends TouchableOpacityProps {
    name: string;
    icon: keyof typeof MaterialIcons.glyphMap;
+   edit?: boolean
    variant?: "primary" | "secondary"
 }
 
-export function Option({ name, icon, variant = "primary", ...rest }: OptionProps) {
+export function Option({ name, icon, edit = false, variant = "primary", ...rest }: OptionProps) {
 
    return (
 
@@ -17,11 +18,21 @@ export function Option({ name, icon, variant = "primary", ...rest }: OptionProps
 
          <MaterialIcons
             name={icon}
-            size={20}
-            color={variant === "primary" ? colors.green[300] : colors.gray[400]}
+            size={22}
+            color={
+               edit === true
+                  ? styles.editColor?.color || colors.green[300]
+                  : variant === "primary"
+                     ? colors.green[300]
+                     : colors.gray[400]
+            }
          />
 
-         <Text style={variant === "primary" ? styles.primaryTitle : styles.secondaryTitle}>
+         <Text style={[
+            variant === "primary" && styles.primaryTitle,
+            variant === "secondary" && styles.secondaryTitle,
+            edit === true && styles.editColor
+         ]}>
             {name}
          </Text>
 

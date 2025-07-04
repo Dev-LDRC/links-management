@@ -36,6 +36,23 @@ async function save(new_link: LinkStorage) {
 
 }
 
+// Add a function for edit a link
+async function edit(linkToUpdate: LinkStorage) {
+   try {
+      const storage = await get();
+      const updatedStorage = storage.map(link =>
+         link.id === linkToUpdate.id ? linkToUpdate : link
+      );
+
+      await AsyncStorage.setItem(
+         LINKS_STORAGE_KEY,
+         JSON.stringify(updatedStorage)
+      );
+   } catch (err) {
+      throw err;
+   }
+}
+
 async function remove(id: string) {
 
    const storage = await get()
@@ -46,7 +63,7 @@ async function remove(id: string) {
       LINKS_STORAGE_KEY,
       JSON.stringify(storage_update_without_the_chosen_for_delete)
    )
-   
+
 }
 
-export const link_storage = { get, save, remove }
+export const link_storage = { get, save, edit, remove }
